@@ -5,7 +5,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	public float Speed;
 	public float AirSpeed;
-	public float JumpSpeed;
 
 	public enum PlayerState {
 		Running,
@@ -27,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
 		R2D.velocity = new Vector2( State == PlayerState.Running ? Speed*h : AirSpeed*h, R2D.velocity.y );
 	}
 
-	public void Jump() {
+	public void Jump(float JumpSpeed) {
 		R2D.velocity = new Vector2( R2D.velocity.x, JumpSpeed );
 	}
 }

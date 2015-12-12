@@ -4,6 +4,7 @@ using System.Collections;
 public class JumpStoneCollision : MonoBehaviour {
 
 	public float DissappearLength = 2.0f;
+	public float JumpSpeed = 8.0f;
 
 	private bool CollisionOccurred = false;
 	private float DissapperedTime = 0f;
@@ -17,7 +18,7 @@ public class JumpStoneCollision : MonoBehaviour {
 			CollisionOccurred = true;
 			StoneRenderer.enabled = false;
 			StoneCollider.enabled = false;
-			Other.gameObject.GetComponent<PlayerMovement>().Jump();
+			Other.gameObject.GetComponent<PlayerMovement>().Jump(JumpSpeed);
 		}
 	}
 
