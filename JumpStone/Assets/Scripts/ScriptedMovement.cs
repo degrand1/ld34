@@ -67,7 +67,7 @@ public class ScriptedMovement : MonoBehaviour {
 					float t = ease( acc / duration );
 					transform.position = Vector3.Lerp( p1.transform.position, p2.transform.position, t );
 				} else {
-					if ( behavior == ScriptedMovementBehavior.CYCLE ) {
+					if ( behavior == ScriptedMovementBehavior.CYCLE || behavior == ScriptedMovementBehavior.CYCLE_LOOP ) {
 						acc = 0f;
 						state = ScriptedMovementState.PAUSE_P2;
 					}
