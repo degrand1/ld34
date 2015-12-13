@@ -23,6 +23,9 @@ public class JumpStoneCollision : MonoBehaviour {
 				StoneCollider.enabled = false;
 			}
 			BroadcastMessage( "EmitParticles" );
+			if ( GetComponent<DropStoneCollision>() == null ) {
+				PlayerPrefs.SetInt( "JumpstonesPopped", PlayerPrefs.GetInt( "JumpstonesPopped" ) + 1 );
+			}
 			Other.gameObject.GetComponent<PlayerMovement>().Jump(JumpSpeed);
 		}
 	}
