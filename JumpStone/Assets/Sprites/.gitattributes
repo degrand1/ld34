@@ -1,3 +1,5 @@
 boxy.png filter=lfs diff=lfs merge=lfs -text
 grass.png filter=lfs diff=lfs merge=lfs -text
 jumpstone.png filter=lfs diff=lfs merge=lfs -text
+door.png filter=lfs diff=lfs merge=lfs -text
+platform.png filter=lfs diff=lfs merge=lfs -text
