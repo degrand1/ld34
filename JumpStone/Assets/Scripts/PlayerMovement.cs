@@ -24,9 +24,17 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
 		// land
 		if ( State == PlayerState.Jumping && R2D.velocity.y <= 0 ) {
-			RaycastHit2D hit = Physics2D.Linecast( transform.position, new Vector2( transform.position.x, transform.position.y - transform.lossyScale.y / 2 ), 1 << LayerMask.NameToLayer( "Platform" ) );
+			RaycastHit2D hit = Physics2D.Linecast( transform.position, new Vector2( transform.position.x, transform.position.y - transform.lossyScale.y / 2 - 0.1f), 1 << LayerMask.NameToLayer( "Platform" ) );
 			if ( hit.collider != null ) {
 				State = PlayerState.Running;
+				transform.parent = hit.transform;
+			}
+		}
+		else if( State == PlayerState.Running ) {
+			RaycastHit2D hit = Physics2D.Linecast( transform.position, new Vector2( transform.position.x, transform.position.y - transform.lossyScale.y / 2 - 0.1f ), 1 << LayerMask.NameToLayer( "Platform" ) );
+			if ( hit.collider == null && transform.parent != null ) {
+				State = PlayerState.Jumping;
+				transform.parent = null;
 			}
 		}
 		float h = Input.GetAxisRaw( "Horizontal" );
