@@ -14,10 +14,14 @@ public class PlayerMovement : MonoBehaviour {
 	public PlayerState State = PlayerState.Running;
 
 	private Rigidbody2D R2D;
+	private bool dead;
+	private GameObject view;
 
 	// Use this for initialization
 	void Start () {
+		dead = false;
 		R2D = transform.GetComponent<Rigidbody2D>();
+		view = transform.Find( "View" ).gameObject;
 	}
 	
 	// Update is called once per frame
@@ -47,8 +51,13 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public void KillPlayer(){
-		BroadcastMessage( "GameOver" );
-		Invoke ( "RestartLevel", 0.5f );
+		if ( !dead ) {
+			dead = true;
+			BroadcastMessage( "GameOver" );
+			BroadcastMessage( "EmitParticles" );
+			view.GetComponent<Spin>().degreesPerSecond = 960f;
+			Invoke ( "RestartLevel", 0.5f );
+		}
 	}
 
 	void RestartLevel()

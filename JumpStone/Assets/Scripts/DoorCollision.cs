@@ -9,7 +9,17 @@ public class DoorCollision : MonoBehaviour {
 	{
 		if( other.gameObject.tag == "Player" )
 		{
-			Application.LoadLevel( NextLevel );
+			Fadeout f = GetComponent<Fadeout>();
+			if ( f != null ) {
+				f.FadeTo();
+				Invoke ( "LoadNextLevel", f.fadeTimeSeconds );
+			} else {
+				LoadNextLevel();
+			}
 		}
+	}
+
+	void LoadNextLevel() {
+		Application.LoadLevel( NextLevel );
 	}
 }

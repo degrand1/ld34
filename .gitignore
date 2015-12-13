@@ -10,3 +10,5 @@ JumpStone/[Bb]uilds/
 *.userprefs
 
 *.DS_Store
+
+bin/

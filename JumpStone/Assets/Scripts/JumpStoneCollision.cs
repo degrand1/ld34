@@ -22,6 +22,7 @@ public class JumpStoneCollision : MonoBehaviour {
 				StoneRenderer.enabled = false;
 				StoneCollider.enabled = false;
 			}
+			BroadcastMessage( "EmitParticles" );
 			Other.gameObject.GetComponent<PlayerMovement>().Jump(JumpSpeed);
 		}
 	}
