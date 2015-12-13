@@ -30,8 +30,6 @@ public class ScriptedMovement : MonoBehaviour {
 		if ( p1 == null || p2 == null ) {
 			Debug.Log( transform.gameObject.name + " scripted movement disabled! P1 or P2 is null!" );
 			enabled = false;
-		} else {
-			transform.position = p1.transform.position;
 		}
 	}
 
