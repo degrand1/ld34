@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public void KillPlayer(){
+		BroadcastMessage( "GameOver" );
 		Invoke ( "RestartLevel", 0.5f );
 	}
 
