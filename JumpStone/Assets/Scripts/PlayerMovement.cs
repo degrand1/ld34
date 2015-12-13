@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour {
 		Jumping
 	};
 
-	PlayerState State = PlayerState.Running;
+	public PlayerState State = PlayerState.Running;
 
 	private Rigidbody2D R2D;
 
@@ -22,12 +22,20 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// land
+		if ( State == PlayerState.Jumping && R2D.velocity.y <= 0 ) {
+			RaycastHit2D hit = Physics2D.Linecast( transform.position, new Vector2( transform.position.x, transform.position.y - transform.lossyScale.y / 2 ), 1 << LayerMask.NameToLayer( "Platform" ) );
+			if ( hit.collider != null ) {
+				State = PlayerState.Running;
+			}
+		}
 		float h = Input.GetAxisRaw( "Horizontal" );
 		R2D.velocity = new Vector2( State == PlayerState.Running ? Speed*h : AirSpeed*h, R2D.velocity.y );
 	}
 
 	public void Jump(float JumpSpeed) {
 		R2D.velocity = new Vector2( R2D.velocity.x, JumpSpeed );
+		State = PlayerState.Jumping;
 	}
 
 	public void KillPlayer(){
