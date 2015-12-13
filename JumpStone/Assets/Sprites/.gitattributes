@@ -3,3 +3,10 @@ grass.png filter=lfs diff=lfs merge=lfs -text
 jumpstone.png filter=lfs diff=lfs merge=lfs -text
 door.png filter=lfs diff=lfs merge=lfs -text
 platform.png filter=lfs diff=lfs merge=lfs -text
+door.png filter=lfs diff=lfs merge=lfs -text
+grass.png filter=lfs diff=lfs merge=lfs -text
+jumpstone.png filter=lfs diff=lfs merge=lfs -text
+marker_end.png filter=lfs diff=lfs merge=lfs -text
+marker_start.png filter=lfs diff=lfs merge=lfs -text
+platform.png filter=lfs diff=lfs merge=lfs -text
+player.png filter=lfs diff=lfs merge=lfs -text
