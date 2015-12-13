@@ -4,13 +4,13 @@ using System.Collections;
 public class Fadeout : MonoBehaviour {
 	public Texture solidtex;
 
-	private float alphaFadeValue;
+	private float alphaFadeValue = 0f;
 	public float fadeTimeSeconds = 2; // seconds
 
 	private const float TO = 1;
 	private const float FROM = -1;
 	private const float HOLD = 0;
-	private float fadeDirection;
+	private float fadeDirection = HOLD;
 
 	public Color fadeColor;
 
@@ -19,8 +19,6 @@ public class Fadeout : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		alphaFadeValue = 0;
-		fadeDirection = HOLD;
 		doneAction = null;
 	}
 	

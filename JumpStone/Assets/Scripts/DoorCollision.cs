@@ -11,8 +11,8 @@ public class DoorCollision : MonoBehaviour {
 		{
 			Fadeout f = GetComponent<Fadeout>();
 			if ( f != null ) {
-				Invoke ( "LoadNextLevel", f.fadeTimeSeconds );
 				f.FadeTo();
+				Invoke ( "LoadNextLevel", f.fadeTimeSeconds );
 			} else {
 				LoadNextLevel();
 			}
