@@ -23,13 +23,20 @@ public class ScriptedMovement : MonoBehaviour {
 
 	private GameObject p1;
 	private GameObject p2;
+	private bool TriggerHit = false;
 	public float duration = 1f;
 	public float pause = 0.5f;
 	public EaseType easing = EaseType.QuadInOut;
 	public ScriptedMovementState state = ScriptedMovementState.PAUSE_P1;
 	public ScriptedMovementBehavior behavior = ScriptedMovementBehavior.CYCLE_LOOP;
+	public bool BeginMovementOnTrigger = false;
 
 	private float acc = 0f;
+
+	public void HitTrigger()
+	{
+		TriggerHit = true;
+	}
 
 	void Start () {
 		p1 = transform.parent.GetChild (1).gameObject;
@@ -41,6 +48,10 @@ public class ScriptedMovement : MonoBehaviour {
 	}
 
 	void Update () {
+
+		if( BeginMovementOnTrigger && !TriggerHit )
+			return;
+
 		acc += Time.deltaTime;
 
 		switch ( state ) {
