@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour {
 			BroadcastMessage( "EmitParticles" );
 			view.GetComponent<Spin>().degreesPerSecond = 960f;
 			Invoke ( "RestartLevel", 0.5f );
+			PlayerPrefs.SetInt( "RekageCount", PlayerPrefs.GetInt( "RekageCount" ) + 1 );
 		}
 	}
 
