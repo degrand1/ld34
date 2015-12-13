@@ -15,12 +15,19 @@ public class ScriptedMovement : MonoBehaviour {
 		PAUSE_P1,
 	};
 
+	public enum ScriptedMovementBehavior {
+		ONE_DIRECTION,
+		CYCLE,
+		CYCLE_LOOP
+	};
+
 	private GameObject p1;
 	private GameObject p2;
 	public float duration = 1f;
 	public float pause = 0.5f;
 	public EaseType easing = EaseType.QuadInOut;
 	public ScriptedMovementState state = ScriptedMovementState.PAUSE_P1;
+	public ScriptedMovementBehavior behavior = ScriptedMovementBehavior.CYCLE_LOOP;
 
 	private float acc = 0f;
 
@@ -38,15 +45,21 @@ public class ScriptedMovement : MonoBehaviour {
 
 		switch ( state ) {
 			case ScriptedMovementState.PAUSE_P1:
-				if ( acc > pause ) {
+				if ( acc < pause ) {
+					transform.position = p1.transform.position;
+				} else {
 					acc = 0f;
 					state = ScriptedMovementState.P1_TO_P2;
+					transform.position = p1.transform.position;
 				}
 				break;
 			case ScriptedMovementState.PAUSE_P2:
-				if ( acc > pause ) {
+				if ( acc < pause ) {
+					transform.position = p2.transform.position;
+				} else {
 					acc = 0f;
 					state = ScriptedMovementState.P2_TO_P1;
+					transform.position = p2.transform.position;
 				}
 				break;
 			case ScriptedMovementState.P1_TO_P2:
@@ -54,8 +67,10 @@ public class ScriptedMovement : MonoBehaviour {
 					float t = ease( acc / duration );
 					transform.position = Vector3.Lerp( p1.transform.position, p2.transform.position, t );
 				} else {
-					acc = 0f;
-					state = ScriptedMovementState.PAUSE_P2;
+					if ( behavior == ScriptedMovementBehavior.CYCLE ) {
+						acc = 0f;
+						state = ScriptedMovementState.PAUSE_P2;
+					}
 				}
 				break;
 			case ScriptedMovementState.P2_TO_P1:
@@ -63,8 +78,10 @@ public class ScriptedMovement : MonoBehaviour {
 					float t = ease( acc / duration );
 					transform.position = Vector3.Lerp( p2.transform.position, p1.transform.position, t );
 				} else {
-					acc = 0f;
-					state = ScriptedMovementState.PAUSE_P1;
+					if ( behavior == ScriptedMovementBehavior.CYCLE_LOOP ) {
+						acc = 0f;
+						state = ScriptedMovementState.PAUSE_P1;
+					}
 				}
 				break;
 		}
