@@ -15,8 +15,8 @@ public class ScriptedMovement : MonoBehaviour {
 		PAUSE_P1,
 	};
 
-	public GameObject p1;
-	public GameObject p2;
+	private GameObject p1;
+	private GameObject p2;
 	public float duration = 1f;
 	public float pause = 0.5f;
 	public EaseType easing = EaseType.QuadInOut;
@@ -25,6 +25,8 @@ public class ScriptedMovement : MonoBehaviour {
 	private float acc = 0f;
 
 	void Start () {
+		p1 = transform.parent.GetChild (1).gameObject;
+		p2 = transform.parent.GetChild (2).gameObject;
 		if ( p1 == null || p2 == null ) {
 			Debug.Log( transform.gameObject.name + " scripted movement disabled! P1 or P2 is null!" );
 			enabled = false;
