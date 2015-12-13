@@ -5,6 +5,7 @@ public class JumpStoneCollision : MonoBehaviour {
 
 	public float DissappearLength = 2.0f;
 	public float JumpSpeed = 8.0f;
+	public bool DeleteOnCollision = true;
 
 	private bool CollisionOccurred = false;
 	private float DissapperedTime = 0f;
@@ -15,9 +16,12 @@ public class JumpStoneCollision : MonoBehaviour {
 	{
 		if( Other.gameObject.tag == "Player" && !CollisionOccurred )
 		{
-			CollisionOccurred = true;
-			StoneRenderer.enabled = false;
-			StoneCollider.enabled = false;
+			if( DeleteOnCollision )
+			{
+				CollisionOccurred = true;
+				StoneRenderer.enabled = false;
+				StoneCollider.enabled = false;
+			}
 			Other.gameObject.GetComponent<PlayerMovement>().Jump(JumpSpeed);
 		}
 	}
