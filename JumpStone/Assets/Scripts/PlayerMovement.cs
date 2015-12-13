@@ -29,4 +29,13 @@ public class PlayerMovement : MonoBehaviour {
 	public void Jump(float JumpSpeed) {
 		R2D.velocity = new Vector2( R2D.velocity.x, JumpSpeed );
 	}
+
+	public void KillPlayer(){
+		Invoke ( "RestartLevel", 0.5f );
+	}
+
+	void RestartLevel()
+	{
+		Application.LoadLevel( Application.loadedLevel );
+	}
 }
