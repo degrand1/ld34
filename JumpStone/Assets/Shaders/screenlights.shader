@@ -49,7 +49,7 @@
 	        fixed4 frag (VS_OUT i) : COLOR
 	        {
                 float4 original = tex2D( _MainTex, i.uv);
-				fixed4 outColor = spotlight( original, ( _ScreenParams.xy * i.uv ), _PlayerPosition, _PlayerColor );
+				fixed4 outColor = spotlight( original, fixed4( _ScreenParams.xy * i.uv, 0, 0 ), _PlayerPosition, _PlayerColor );
 	            return outColor;
 	        }
 	       
