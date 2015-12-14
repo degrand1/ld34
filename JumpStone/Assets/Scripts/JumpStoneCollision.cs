@@ -36,6 +36,14 @@ public class JumpStoneCollision : MonoBehaviour {
 		StoneCollider = transform.GetComponent<BoxCollider2D>();
 	}
 
+	public void ResetStone()
+	{
+		CollisionOccurred = false;
+		StoneRenderer.enabled = true;
+		StoneCollider.enabled = true;
+		DissapperedTime = 0f;
+	}
+
 	void Update()
 	{
 		if( CollisionOccurred )

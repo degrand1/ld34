@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour {
 	private Rigidbody2D R2D;
 	private bool dead;
 	private GameObject view;
+	private bool checkpointHit = false;
+	private Vector3 checkpointLocation;
 
 	// Use this for initialization
 	void Start () {
@@ -61,8 +63,30 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
+	public void HitCheckpoint(Vector3 Location)
+	{
+		checkpointHit = true;
+		checkpointLocation = Location;
+	}
+
 	void RestartLevel()
 	{
-		Application.LoadLevel( Application.loadedLevel );
+		if( checkpointHit )
+		{
+			view.GetComponent<Spin>().degreesPerSecond = 0;
+			view.transform.rotation = Quaternion.identity;
+			BroadcastMessage( "GameOverOver" );
+			foreach( GameObject stone in GameObject.FindGameObjectsWithTag("Stone") )
+				stone.GetComponent<JumpStoneCollision>().ResetStone();
+			transform.position = checkpointLocation;
+			Vector3 CameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
+			GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3( checkpointLocation.x, checkpointLocation.y, CameraPosition.z );
+			dead = false;
+			R2D.velocity = new Vector2( 0f, 0f );
+		}
+		else
+		{
+			Application.LoadLevel( Application.loadedLevel );
+		}
 	}
 }

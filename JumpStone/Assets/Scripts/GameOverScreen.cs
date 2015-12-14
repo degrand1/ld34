@@ -20,6 +20,10 @@ public class GameOverScreen : MonoBehaviour {
 		enabled = true;
 	}
 
+	void GameOverOver() {
+		enabled = false;
+	}
+
 	void Update() {
 		if ( !hasPlayedWarningSfx ) {
 			// AudioSource.PlayClipAtPoint( warningSfx, new Vector2( transform.position.x, transform.position.y ) );
