@@ -3,13 +3,13 @@ using System.Collections;
 
 public class GameOverScreen : MonoBehaviour {
 	bool hasPlayedWarningSfx = false;
+	public Texture2D gameover;
 
 	void Start() {
 		enabled = false;
 	}
 
 	void OnGUI() {
-		Texture2D gameover = Resources.Load<Texture2D>( "gameover" );
 		if ( gameover != null ) {
 			GUI.Label( new Rect( ( Screen.width - gameover.width ) / 2, ( Screen.height - gameover.height ) / 2, gameover.width, gameover.height ),
 								 gameover );
